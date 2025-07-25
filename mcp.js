@@ -12,6 +12,10 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(json());
 
+app.get('/', (req, res) => {
+  res.send('🧠 MCP Agent is alive and listening...');
+});
+
 // ElevenLabs MCP expects this route to stream back responses
 app.get('/mcp', async (req, res) => {
   const authToken = req.headers['authorization'];
