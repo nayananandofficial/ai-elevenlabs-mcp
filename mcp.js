@@ -1,8 +1,8 @@
 import express, { json } from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
-import { createEventStream } from './utils/sse';
-import { runCoachAgent } from './agents/coach';
+import { createEventStream } from './utils/sse.j';
+import { runCoachAgent } from './agents/coach.js';
 
 config();
 
