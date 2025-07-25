@@ -31,13 +31,17 @@ app.get('/mcp', async (req, res) => {
 
   const stream = createEventStream(res);
 
-  // Simulate handling a voice input (you'll connect Whisper + LLM later)
-  await runCoachAgent({ stream });
-
-  // Close stream after completion
-  stream.end();
+  // Run MCP Agent and get tools
+  try {
+    const tools = await runCoachAgent({ stream });
+    stream.write({ tools }); // MCP expects tools to be streamed like this
+    stream.end(); // Close the stream cleanly
+  } catch (err) {
+    console.error('MCP Error:', err);
+    res.status(500).json({ error: 'Internal MCP error' });
+  }
 });
 
 app.listen(port, () => {
-  console.log(`🧠 MCP Server running on http://localhost:${port}/mcp`);
+  console.log(`🧠 MCP Server running at http://localhost:${port}/mcp`);
 });

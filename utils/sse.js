@@ -1,12 +1,11 @@
-function createEventStream(res) {
+export function createEventStream(res) {
   return {
-    send: (data) => {
+    write: (data) => {
       res.write(`data: ${JSON.stringify(data)}\n\n`);
     },
     end: () => {
+      res.write(`event: close\ndata: stream closed\n\n`);
       res.end();
-    }
+    },
   };
 }
-
-export { createEventStream };
