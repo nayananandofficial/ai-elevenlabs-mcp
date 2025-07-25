@@ -1,7 +1,7 @@
 import express, { json } from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
-import { createEventStream } from './utils/sse.j';
+import { createEventStream } from './utils/sse.js';
 import { runCoachAgent } from './agents/coach.js';
 
 config();
